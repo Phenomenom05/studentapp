@@ -28,7 +28,7 @@ const Welcome = () => {
 
   return (
     <div>
-      <h1>Welcome, {userName}! Your are good</h1>
+      <h1>Welcome, {userName}!</h1>
       <p>Good luck on your exam.</p>
       <button onClick={handleProceed}>Proceed</button>
     </div>
