@@ -7,12 +7,17 @@ import LoginImg from './assets/images/Login.png'
 import { RiEyeCloseLine } from 'react-icons/ri';
 import { FaRegEye } from 'react-icons/fa';
 import Logo from './assets/images/NupatLogo.png'
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+import { ClipLoader } from "react-spinners";
+
 
 const Login = () => {
   const [userName, setUserName] = useState("");
   const [code, setCode] = useState("");
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
 
   const togglePasswordVisibility = () => {
@@ -21,16 +26,21 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.post(
         "https://davidphenom.pythonanywhere.com/start-exam/",
         { userName, code }
       );
+      toast.success(`Login successful, Welcome ${userName}!`);
       navigate("/welcome", {
         state: { userName: response.data.userName, code: response.data.code },
       });
     } catch (error) {
+      toast.error(`There was an error logging ${userName} in!`);
       console.error("There was an error starting the exam!", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -68,7 +78,13 @@ const Login = () => {
               </IconButton>
             </Div>
 
-            <LoginButton type="submit">Submit</LoginButton>
+            <LoginButton type="submit" disabled={loading}>
+              {loading ? (
+                <ClipLoader size={20} color={"#fff"} />
+              ) : (
+                "Submit"
+              )}
+            </LoginButton>
           </Form>
         </Container>
 

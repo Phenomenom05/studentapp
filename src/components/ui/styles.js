@@ -102,7 +102,7 @@ export const LoginButton = styled.button`
   margin-top: 20px;
 
   &:hover {
-    background-color: #403A3B;
+    // background-color: #403A3B;
   }
 
   @media (max-width: 768px) {
@@ -117,8 +117,8 @@ export const Div = styled.div`
 
 export const IconButton = styled.button`
   position: absolute;
-  top: 15px;
-  right: 10px; 
+  top: 16.8rem;
+  right: 160px; 
   background: none;
   border: none;
   padding: 10px; 
@@ -128,7 +128,7 @@ export const IconButton = styled.button`
   }
 
   @media (max-width: 768px) {
-    right: 60px; 
+    right: 57px; 
     top: 215px;
   }
 `;
