@@ -80,7 +80,7 @@ export const Form = styled.form`
     padding-left: 20px; 
     padding-right: 20px; 
     height: 400px;
-    margin-left: 20px; 
+    margin-left: 8px; 
     border-radius: 10px;
     order: 2;
     background: 
@@ -155,7 +155,6 @@ export const LogoImage = styled.img`
     left: 65px;
     height: 80px;
     width: 80px;
-    border-radius: 50%;
     object-fit: contain;
     background-color: rgb(4, 58, 59);
   }
