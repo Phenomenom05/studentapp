@@ -1,4 +1,4 @@
-body {
+/* body {
   font-family: 'Roboto', sans-serif;
   background-color: #e9ecef;
   color: #333;
@@ -21,7 +21,7 @@ body {
   padding: 20px;
 }
 
-h1, h2 {
+ h2 {
   color: #2c3e50;
   text-align: center;
   margin: 20px 0;
@@ -38,40 +38,10 @@ p {
   margin: 10px 0 20px;
 }
 
-input[type="text"],
-textarea {
-  width: 100%;
-  padding: 12px;
-  margin: 15px 0;
-  display: block;
-  border: 1px solid #ced4da;
-  border-radius: 5px;
-  font-size: 16px;
-  background-color: #f8f9fa;
-}
-
 textarea {
   height: 120px;
 }
 
-button {
-  display: block;
-  width: 100%;
-  margin: 20px 0;
-  padding: 12px;
-  background-color: #007bff;
-  color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  font-size: 18px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
 
 label {
   display: block;
@@ -106,4 +76,4 @@ input[type="radio"] {
   input[type="text"], textarea, button {
     font-size: 16px;
   }
-}
+} */
