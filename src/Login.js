@@ -2,11 +2,22 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { FlexedDiv, Container, StyledInput, Form, LoginButton, Div, IconButton, Img, ImgContainer, LogoImage } from "./components/ui/styles";
+import LoginImg from './assets/images/Login.png'
+import { RiEyeCloseLine } from 'react-icons/ri';
+import { FaRegEye } from 'react-icons/fa';
+import Logo from './assets/images/NupatLogo.png'
 
 const Login = () => {
   const [userName, setUserName] = useState("");
   const [code, setCode] = useState("");
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevState) => !prevState);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,23 +35,49 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Enter your name"
-        value={userName}
-        onChange={(e) => setUserName(e.target.value)}
-        required
+    <div>
+      <LogoImage
+        src={Logo}
+        alt=""
       />
-      <input
-        type="text"
-        placeholder="Enter exam code"
-        value={code}
-        onChange={(e) => setCode(e.target.value)}
-        required
-      />
-      <button type="submit">Submit</button>
-    </form>
+
+      <FlexedDiv>
+        <Container>
+          <Form onSubmit={handleSubmit}>
+
+            <StyledInput
+              type="text"
+              placeholder="Enter your name"
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
+              required
+            />
+            <Div>
+              <StyledInput
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Enter exam code"
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                required
+              />
+              <IconButton
+                type="button"
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? <FaRegEye color="grey" /> : <RiEyeCloseLine color="grey" />}
+              </IconButton>
+            </Div>
+
+            <LoginButton type="submit">Submit</LoginButton>
+          </Form>
+        </Container>
+
+
+        <ImgContainer>
+          <Img src={LoginImg} alt="" />
+        </ImgContainer>
+      </FlexedDiv>
+    </div>
   );
 };
 
