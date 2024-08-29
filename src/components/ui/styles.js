@@ -6,6 +6,7 @@ export const FlexedDiv = styled.div`
   width: 100%;
   margin-top: 30px;
   margin-inline: 40px;
+  gap: 0;
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -38,13 +39,13 @@ export const ImgContainer = styled.div`
      background: 
     margin-left: 0px;
     border-radius: 10px;
+    mardin-right: 10px;
   }
 `;
 
 export const StyledInput = styled.input`
-  width: 80%;
+  width: 100%;
   padding-block: 15px;
-  margin: 8px 0;
   box-sizing: border-box;
   border: 1px solid gray;
   border-radius: 10px;
@@ -69,18 +70,19 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 80vh;
-  width: 500px;
+  height: 90vh;
+  width: 600px;
   padding: 20px 50px;
-  padding-left: 150px;
+  padding-left: 50px;
   position: relative;
+  margin-left: 30px;
 
   @media (max-width: 768px) {
-    width: 80%;
+    width: 85%;
     padding-left: 20px; 
     padding-right: 20px; 
     height: 400px;
-    margin-left: 8px; 
+    margin-left: 10px; 
     border-radius: 10px;
     order: 2;
     background: 
@@ -95,7 +97,7 @@ export const LoginButton = styled.button`
   color: gray;
   border-radius: 5px;
   transition: background-color 0.3s ease;
-  width: 40%;
+  width: 60%;
   font-size: 20px;
   font-weight: 300;
   margin-left: 100px;
@@ -106,8 +108,8 @@ export const LoginButton = styled.button`
   }
 
   @media (max-width: 768px) {
-    width: 80%; 
-    margin-left: 30px;
+    width: 50%; 
+    margin-left: 74px;
   }
 `;
 
@@ -118,7 +120,7 @@ export const Div = styled.div`
 export const IconButton = styled.button`
   position: absolute;
   top: 16.8rem;
-  right: 160px; 
+  right: 60px; 
   background: none;
   border: none;
   padding: 10px; 
@@ -129,7 +131,7 @@ export const IconButton = styled.button`
 
   @media (max-width: 768px) {
     right: 57px; 
-    top: 215px;
+    top: 180px;
   }
 `;
 
@@ -139,6 +141,8 @@ export const Img = styled.img`
 
   @media (max-width: 768px) {
    order: 1;
+    mardin-right: 10px;
+  width: 100%;
   }
 `;
 
@@ -146,7 +150,7 @@ export const Img = styled.img`
 export const LogoImage = styled.img`
   position: absolute;
   top: 35px;
-  left: 100px;
+  left: 130px;
   transform: translateX(-50%);
   z-index: 20;
 

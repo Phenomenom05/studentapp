@@ -22,7 +22,7 @@ const Welcome = () => {
       const response = await axios.post(
         `https://davidphenom.pythonanywhere.com/proceed-exam/${code}/${userName}/`
       );
-      toast.success(`Exam started successfully for ${userName}!`);
+      toast.success(`Exam started successfully for ${userName}!` , {className: "my-toast"});
 
       // Check if the response contains a redirect URL
       if (response.status === 200 && response.data.redirect_url) {
@@ -33,7 +33,7 @@ const Welcome = () => {
         console.error("Unexpected response format:", response);
       }
     } catch (error) {
-      toast.error("There was an error starting the exam!");
+      toast.error("There was an error starting the exam!" , {className: "my-toast"});
       console.error("There was an error proceeding with the exam!", error);
     }
   };
@@ -47,7 +47,7 @@ const Welcome = () => {
         color: 'green',
         marginLeft: '20px',
         marginTop: '10px',
-      }}>Welcome, {userName}!</h1>
+      }} className="text-[30px] sm:text-[40px]">Welcome, {userName}!</h1>
 
       <div style={{
         display: 'flex',
