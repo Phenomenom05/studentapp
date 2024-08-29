@@ -32,12 +32,12 @@ const Login = () => {
         "https://davidphenom.pythonanywhere.com/start-exam/",
         { userName, code }
       );
-      toast.success(`Login successful, Welcome ${userName}!`);
+      toast.success(`Login successful, Welcome ${userName}!`, {className: "my-toast"});
       navigate("/welcome", {
         state: { userName: response.data.userName, code: response.data.code },
       });
     } catch (error) {
-      toast.error(`There was an error logging ${userName} in!`);
+      toast.error(`There was an error logging ${userName} in!`, {className: "my-toast"});
       console.error("There was an error starting the exam!", error);
     } finally {
       setLoading(false);
@@ -53,7 +53,7 @@ const Login = () => {
 
       <FlexedDiv>
         <Container>
-          <Form onSubmit={handleSubmit}>
+          <Form className="" onSubmit={handleSubmit}>
 
             <StyledInput
               type="text"

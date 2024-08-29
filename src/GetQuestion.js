@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { Container, FlexedDiv } from "./components/ui/styles";
+import ObjGrid from "./components/ObjGrid";
 
 const GetQuestion = () => {
   const [question, setQuestion] = useState("");
+  const [selectedQuestion, setSelectedQuestion] = useState(null);
   const [selectedOption, setSelectedOption] = useState("");
   const navigate = useNavigate();
   const { userName, code } = useParams();
@@ -63,57 +66,67 @@ const GetQuestion = () => {
     }
   };
 
-//  if (!question) {
-//    return <div>Loading...</div>;
-//  }
+  const handleSelectQuestion = (index) => {
+    console.log('Selected question:', index + 1);
+    setSelectedQuestion(index + 1);
+  };
+
+  //  if (!question) {
+  //    return <div>Loading...</div>;
+  //  }
 
   return (
-    <div>
-      <h2>{question.question}</h2>
-      <div>
-        <label>
-          <input
-            type="radio"
-            name="option"
-            value={question.option1}
-            checked={selectedOption === question.option1}
-            onChange={(e) => setSelectedOption(e.target.value)}
-          />
-          {question.option1}
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="option"
-            value={question.option2}
-            checked={selectedOption === question.option2}
-            onChange={(e) => setSelectedOption(e.target.value)}
-          />
-          {question.option2}
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="option"
-            value={question.option3}
-            checked={selectedOption === question.option3}
-            onChange={(e) => setSelectedOption(e.target.value)}
-          />
-          {question.option3}
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="option"
-            value={question.answer}
-            checked={selectedOption === question.answer}
-            onChange={(e) => setSelectedOption(e.target.value)}
-          />
-          {question.answer}
-        </label>
-      </div>
-      <button onClick={handleNext}>Next</button>
-    </div>
+    <FlexedDiv>
+      <Container>
+        <ObjGrid onSelectQuestion={handleSelectQuestion}/>
+      </Container>
+      <Container>
+        <h2>{question.question}</h2>
+        <div>
+          <label>
+            <input
+              type="radio"
+              name="option"
+              value={question.option1}
+              checked={selectedOption === question.option1}
+              onChange={(e) => setSelectedOption(e.target.value)}
+            />
+            {question.option1}
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="option"
+              value={question.option2}
+              checked={selectedOption === question.option2}
+              onChange={(e) => setSelectedOption(e.target.value)}
+            />
+            {question.option2}
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="option"
+              value={question.option3}
+              checked={selectedOption === question.option3}
+              onChange={(e) => setSelectedOption(e.target.value)}
+            />
+            {question.option3}
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="option"
+              value={question.answer}
+              checked={selectedOption === question.answer}
+              onChange={(e) => setSelectedOption(e.target.value)}
+            />
+            {question.answer}
+          </label>
+        </div>
+        <button onClick={handleNext}>Next</button>
+      </Container>
+    </FlexedDiv>
   );
 };
 
