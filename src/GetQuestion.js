@@ -3,6 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { Container, FlexedDiv } from "./components/ui/styles";
 import ObjGrid from "./components/ObjGrid";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const GetQuestion = () => {
 
@@ -44,6 +46,7 @@ const GetQuestion = () => {
         });
       }
     } catch (error) {
+      toast.error("There was an error fetching the question!", error);
       console.error("There was an error fetching the question!", error);
     }
   };
@@ -59,9 +62,11 @@ const GetQuestion = () => {
         setSelectedOption(""); // Clear the selected option
         fetchQuestion(); // Fetch the next question
       } else {
+        toast.error("No question available or no option selected.");
         console.error("No question available or no option selected.");
       }
     } catch (error) {
+      toast.error("There was an error processing the next question!", error);
       console.error("There was an error processing the next question!", error);
     }
   };
