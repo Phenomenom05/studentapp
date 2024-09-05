@@ -19,7 +19,7 @@ export default function ObjGrid({ onSelectQuestion }) {
 
   return (
     <div>
-      <div className="text-center text-white p-4 bg-[#043A3B]">
+      <div className="text-center text-white p-4 bg-[#043A3B] hidden sm:hidden md:block lg:block">
         <p className="mb-4">{answeredCount} questions answered already</p>
         <div className="flex items-center relative h-[10px] w-[100%] bg-gray-300 rounded mb-4">
           <div

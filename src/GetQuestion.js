@@ -5,6 +5,22 @@ import { Container, FlexedDiv } from "./components/ui/styles";
 import ObjGrid from "./components/ObjGrid";
 
 const GetQuestion = () => {
+
+  const Spinner = ({ size = 70, color = '#043A3B' }) => {
+    return (
+      <div
+        className="animate-spin"
+        style={{
+          height: size,
+          width: size,
+          border: `4px solid ${color}`,
+          borderTop: `4px solid transparent`,
+          borderRadius: '50%',
+        }}
+      ></div>
+    );
+  };
+
   const [question, setQuestion] = useState(null);
   const [selectedOption, setSelectedOption] = useState("");
   const navigate = useNavigate();
@@ -56,7 +72,7 @@ const GetQuestion = () => {
   };
 
   if (!question) {
-    return <div>Loading...</div>;
+    return <div className="flex justify-center items-center h-[100vh]"><Spinner/></div>;
   }
 
   return (
