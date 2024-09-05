@@ -6,29 +6,28 @@ export default function ObjGrid({ onSelectQuestion }) {
   const [answeredQuestions, setAnsweredQuestions] = useState(
     new Array(totalQuestions).fill(false)
   );
-  const [questions, setQuestions] = useState([]);
 
   const answeredCount = answeredQuestions.filter((answered) => answered).length;
   const progressPercentage = (answeredCount / totalQuestions) * 100;
 
   const handleQuestionClick = (index) => {
-    const updatedAnswers = [...answeredQuestions];
-    updatedAnswers[index] = !updatedAnswers[index];
-    setAnsweredQuestions(updatedAnswers);
     onSelectQuestion(index); // Pass the selected question index to the parent
+    const updatedAnswers = [...answeredQuestions];
+    updatedAnswers[index] = true; // Mark the question as answered
+    setAnsweredQuestions(updatedAnswers);
   };
 
   return (
     <div>
-      <div className="text-center text-white p-4">
+      <div className="text-center text-white p-4 bg-[#043A3B]">
         <p className="mb-4">{answeredCount} questions answered already</p>
-        <div className="flex items-center relative h-1 w-[100%] bg-gray-300 rounded mb-4">
+        <div className="flex items-center relative h-[10px] w-[100%] bg-gray-300 rounded mb-4">
           <div
             className="absolute top-0 left-0 h-full bg-green-400 rounded"
             style={{ width: `${progressPercentage}%` }}
           ></div>
         </div>
-        <div className="grid grid-cols-10 gap-x-[30px] gap-[25px]">
+        <div className="grid grid-cols-5 gap-x-[0px] gap-[5px]">
           {answeredQuestions.map((answered, index) => (
             <div key={index} className="flex flex-col items-center">
               <button

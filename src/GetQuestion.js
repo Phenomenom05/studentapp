@@ -5,59 +5,43 @@ import { Container, FlexedDiv } from "./components/ui/styles";
 import ObjGrid from "./components/ObjGrid";
 
 const GetQuestion = () => {
-  const [question, setQuestion] = useState("");
-  const [selectedQuestion, setSelectedQuestion] = useState(null);
+  const [question, setQuestion] = useState(null);
   const [selectedOption, setSelectedOption] = useState("");
   const navigate = useNavigate();
   const { userName, code } = useParams();
 
   useEffect(() => {
-    const fetchQuestion = async () => {
-      try {
-        const response = await axios.get(
-          `https://davidphenom.pythonanywhere.com/get-objquestion/${code}/${userName}/`
-        );
-        console.log("Response data:", response.data);
-        if (response.data) {
-          setQuestion(response.data);
-        } else {
-          navigate(`/get-theoryquestion/${code}/${userName}`, {
-            state: { userName, code },
-          });
-        }
-      } catch (error) {
-        console.error("There was an error fetching the question!", error);
+    fetchQuestion(); // Fetch the first question on component mount
+  }, []);
+
+  const fetchQuestion = async (index = null) => {
+    try {
+      const url = index !== null
+        ? `https://davidphenom.pythonanywhere.com/get-objquestion/${code}/${userName}/?index=${index}`
+        : `https://davidphenom.pythonanywhere.com/get-objquestion/${code}/${userName}/`;
+      const response = await axios.get(url);
+      if (response.data) {
+        setQuestion(response.data);
+      } else {
+        navigate(`/get-theoryquestion/${code}/${userName}`, {
+          state: { userName, code },
+        });
       }
-    };
-    fetchQuestion();
-  }, [userName, code, navigate]);
+    } catch (error) {
+      console.error("There was an error fetching the question!", error);
+    }
+  };
 
   const handleNext = async () => {
     try {
       if (question && selectedOption) {
-        // Submit the answer with the question ID
+        // Submit the answer
         await axios.post(
           `https://davidphenom.pythonanywhere.com/answer-objquestion/${question.id}/${userName}/`,
           { picked: selectedOption }
         );
-
-        // Clear the selected option
-
-        // Fetch the next question
-        const response = await axios.get(
-          `https://davidphenom.pythonanywhere.com/get-objquestion/${code}/${userName}/`
-        );
-        setSelectedOption("");
-        console.log("Next question response data:", response.data);
-
-        if (response.data) {
-          setQuestion(response.data);
-        } else {
-          // Redirect to theory question when no more questions are available
-          navigate(`/get-theoryquestion/${code}/${userName}`, {
-            state: { userName, code },
-          });
-        }
+        setSelectedOption(""); // Clear the selected option
+        fetchQuestion(); // Fetch the next question
       } else {
         console.error("No question available or no option selected.");
       }
@@ -68,63 +52,42 @@ const GetQuestion = () => {
 
   const handleSelectQuestion = (index) => {
     console.log('Selected question:', index + 1);
-    setSelectedQuestion(index + 1);
+    fetchQuestion(index + 1); // Fetch the question corresponding to the selected index
   };
 
-  //  if (!question) {
-  //    return <div>Loading...</div>;
-  //  }
+  if (!question) {
+    return <div>Loading...</div>;
+  }
 
   return (
-    <FlexedDiv>
+    <FlexedDiv className="bg-gray-400">
       <Container>
-        <ObjGrid onSelectQuestion={handleSelectQuestion}/>
+        <ObjGrid onSelectQuestion={handleSelectQuestion} />
       </Container>
-      <Container>
-        <h2>{question.question}</h2>
-        <div>
-          <label>
-            <input
-              type="radio"
-              name="option"
-              value={question.option1}
-              checked={selectedOption === question.option1}
-              onChange={(e) => setSelectedOption(e.target.value)}
-            />
-            {question.option1}
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="option"
-              value={question.option2}
-              checked={selectedOption === question.option2}
-              onChange={(e) => setSelectedOption(e.target.value)}
-            />
-            {question.option2}
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="option"
-              value={question.option3}
-              checked={selectedOption === question.option3}
-              onChange={(e) => setSelectedOption(e.target.value)}
-            />
-            {question.option3}
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="option"
-              value={question.answer}
-              checked={selectedOption === question.answer}
-              onChange={(e) => setSelectedOption(e.target.value)}
-            />
-            {question.answer}
-          </label>
+      <Container className="">
+        <div className="bg-white py-[50px] px-[30px] mx-[60px] rounded">
+          <h2 className="text-[30px]">{question.question}</h2>
+          <div className="">
+            {['option1', 'option2', 'option3', 'answer'].map((opt, i) => (
+              <label key={i} className="flex items-center gap-[20px]">
+                <input
+                  type="radio"
+                  name="option"
+                  value={question[opt]}
+                  checked={selectedOption === question[opt]}
+                  onChange={(e) => setSelectedOption(e.target.value)}
+                  className="block h-[40px]"
+                />
+                <span className="text-[22px]">{question[opt]}</span>
+
+              </label>
+            ))}
+          </div>
         </div>
-        <button onClick={handleNext}>Next</button>
+        <div className="flex justify-end mr-[100px] mt-[30px]">
+          <button onClick={handleNext} className="bg-[#043A3B] text-white py-[8px] px-[30px] rounded">Next</button>
+        </div>
+
       </Container>
     </FlexedDiv>
   );
